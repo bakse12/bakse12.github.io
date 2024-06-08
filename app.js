@@ -80,6 +80,20 @@ btn6.addEventListener("click", function(){
 	}
 });
 
+// app.js
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    let counter = 0;
+    const image = document.getElementById('clickableImage');
+    const counterDisplay = document.getElementById('counter');
+
+    image.addEventListener('click', () => {
+        counter++;
+        counterDisplay.textContent = `Clicks: ${counter}`;
+    });
+});
+
+
 
 Telegram.WebApp.onEvent("mainButtonClicked", function(){
 	tg.sendData(item);

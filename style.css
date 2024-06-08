@@ -1,31 +1,40 @@
-body {
-	margin: 0;
-	padding: 0;
-	font-size: 18px;
-	color: var(--tg-theme-text-color);
-	background: var(--tg-theme-bg-color);
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .container {
-	max-width: 390px;
+	
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
 }
 
 .inner {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 200px 200px 200px;
-}
-
-.img {
-	width: 150px;
-}
-
-.item {
+	
 	text-align: center;
 }
 
+.img {
+	max-width: 100%;
+    height: auto;
+	width: 150px;
+    cursor: pointer;
+}
+
+.item {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+	
+}
+
 .btn {
-	display: inline-block;
+
 	padding: 10px 20px;
 	border: none;
 	background: rgb(248, 168, 24);
@@ -34,17 +43,21 @@ body {
 	text-transform: uppercase;
 	font-weight: 700;
 
-	transition: background .2s linear;
 }
 
 .btn:hover {
 	background: lightgreen;
+	
 }
 
 .usercard {
 	text-align: center;
 }
 
+#counter {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
 
 
 
