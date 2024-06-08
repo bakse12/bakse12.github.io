@@ -1,4 +1,6 @@
 body {
+    max-width: 500px; /* Максимальная ширина страницы */
+    margin: 0 auto; /* Центрируем контент на странице */
     background-color: white; /* Устанавливаем белый фон для всей страницы */
     margin: 0;
     font-family: Arial, sans-serif;
