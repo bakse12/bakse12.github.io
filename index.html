@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="style.css">
     <title>Click Counter</title>
 </head>
@@ -11,24 +11,57 @@
     <div class="container">
         <div class="inner">
             <div class="item">
-				<div id="counter">Clicks: 0</div>
+                <div id="counter">Clicks: 0</div>
+                <div id="attempts">Attempts left: 5</div>
                 <img src="1.png" alt="Clickable Image" class="img" id="clickableImage">
-                <p><a class="btn" id="btn1" href="game.html">Играть</a></p>
-                
+                <p><a class="btn" id="btn1" href="#">Играть</a></p>
             </div>
         </div>
     </div>
     <div class="usercard" id="usercard"></div>
 
-	<script>
+    <script>
         document.addEventListener('DOMContentLoaded', (event) => {
-            let counter = 0;
+            let counter = parseInt(localStorage.getItem('clicks')) || 0;
             const image = document.getElementById('clickableImage');
             const counterDisplay = document.getElementById('counter');
+            const attemptsDisplay = document.getElementById('attempts');
+            const playButton = document.getElementById('btn1');
+
+            let attemptsLeft = parseInt(localStorage.getItem('attemptsLeft')) || 5;
+            const lastPlayedDate = localStorage.getItem('lastPlayedDate');
+            const today = new Date().toDateString();
+
+            // Сбрасываем количество попыток, если новый день
+            if (lastPlayedDate !== today) {
+                attemptsLeft = 5;
+                localStorage.setItem('attemptsLeft', attemptsLeft);
+                localStorage.setItem('lastPlayedDate', today);
+            }
+
+            counterDisplay.textContent = `Clicks: ${counter}`;
+            attemptsDisplay.textContent = `Attempts left: ${attemptsLeft}`;
 
             image.addEventListener('click', () => {
                 counter++;
                 counterDisplay.textContent = `Clicks: ${counter}`;
+                localStorage.setItem('clicks', counter);
+            });
+
+            playButton.addEventListener('click', (event) => {
+                if (attemptsLeft > 0) {
+                    window.location.href = "game.html";
+                } else {
+                    alert('No attempts left for today.');
+                }
+            });
+
+            // Слушаем событие storage, чтобы обновить клики и попытки, когда они изменяются в game.html
+            window.addEventListener('storage', () => {
+                counter = parseInt(localStorage.getItem('clicks')) || 0;
+                attemptsLeft = parseInt(localStorage.getItem('attemptsLeft')) || 0;
+                counterDisplay.textContent = `Clicks: ${counter}`;
+                attemptsDisplay.textContent = `Attempts left: ${attemptsLeft}`;
             });
         });
     </script>
